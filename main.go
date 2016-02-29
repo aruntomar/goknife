@@ -3,8 +3,42 @@ package main
 import (
 	"flag"
 	"fmt"
+	"github.com/go-chef/chef"
+	"io/ioutil"
 	"os"
 )
+
+var (
+	client *chef.Client
+)
+
+func init() {
+	//get the chef config from env params
+	clientName := os.Getenv("CLIENT_NAME")
+	clientKey := os.Getenv("CLIENT_KEY")
+	baseURL := os.Getenv("CHEF_SERVER_URL")
+
+	// fmt.Printf("\n Client name: %s\n Client Key: %s\n BaseURL: %s\n", clientName, clientKey, baseURL)
+
+	// read the client key
+	key, err := ioutil.ReadFile(clientKey)
+	if err != nil {
+		fmt.Println("Couldn't read key", err)
+		os.Exit(1)
+	}
+
+	// build a client
+	client, err = chef.NewClient(&chef.Config{
+		Name:    clientName,
+		Key:     string(key),
+		BaseURL: baseURL,
+		// SkipSSL: true,
+	})
+	if err != nil {
+		fmt.Println("error setting up client", err)
+		os.Exit(1)
+	}
+}
 
 func main() {
 	flag.Usage = usage
@@ -12,12 +46,14 @@ func main() {
 	args := flag.Args()
 	if len(args) < 1 {
 		usage()
+		os.Exit(1)
 	}
+
 }
 
 func usage() {
 
-	usage := `ERROR: You need to pass a sub-command (e.g., knife SUB-COMMAND)
+	usageMSG := `ERROR: You need to pass a sub-command (e.g., knife SUB-COMMAND)
 
 Usage: knife sub-command (options)
     -s, --server-url URL             Chef Server URL
@@ -42,6 +78,5 @@ Usage: knife sub-command (options)
 
 Available subcommands: (for details, knife SUB-COMMAND --help)
 `
-	fmt.Println(usage)
-	os.Exit(1)
+	fmt.Println(usageMSG)
 }
