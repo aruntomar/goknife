@@ -1,11 +1,12 @@
 package main
 
 import (
+	"encoding/json"
 	"flag"
 	"fmt"
 	"github.com/go-chef/chef"
 	"io/ioutil"
-	// "log"
+	"log"
 	"os"
 )
 
@@ -76,6 +77,17 @@ func main() {
 			DataBagDelete(args[3])
 		case "show":
 			DataBagShow(args[3])
+		case "from":
+			for _, fname := range args[5:] {
+				jsonData, err := ioutil.ReadFile(fname)
+				if err != nil {
+					log.Fatalf("%v\n", err)
+				}
+				var rnd map[string]string
+				err = json.Unmarshal(jsonData, &rnd)
+				DataBagCreateItem(args[4], rnd)
+			}
+
 		}
 	default:
 		usage()

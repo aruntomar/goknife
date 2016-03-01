@@ -45,3 +45,12 @@ func DataBagShow(dbname string) {
 		fmt.Printf("%v\n", k)
 	}
 }
+
+// DataBagCreateItem creates a data bag item
+func DataBagCreateItem(dbname string, dbitem chef.DataBagItem) {
+	err := client.DataBags.CreateItem(dbname, dbitem)
+	if err != nil {
+		log.Fatalf("%s\n", err)
+	}
+	fmt.Printf("Updated data_bag_item[%s::%s]\n", dbname, dbitem)
+}
