@@ -34,3 +34,14 @@ func DataBagDelete(dbname string) {
 	}
 	fmt.Printf("Deleted data_bag[%s]\n", dbname)
 }
+
+// DataBagShow will show the detailed contents of databag
+func DataBagShow(dbname string) {
+	items, err := client.DataBags.ListItems(dbname)
+	if err != nil {
+		log.Fatalf("%s", err)
+	}
+	for k := range *items {
+		fmt.Printf("%v\n", k)
+	}
+}

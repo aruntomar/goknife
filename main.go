@@ -74,6 +74,8 @@ func main() {
 			DataBagCreate(args[3])
 		case "delete":
 			DataBagDelete(args[3])
+		case "show":
+			DataBagShow(args[3])
 		}
 	default:
 		usage()
