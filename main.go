@@ -66,6 +66,11 @@ func main() {
 		case "show":
 			NodeShow(args[2])
 		}
+	case "data":
+		switch args[2] {
+		case "list":
+			DataBagList()
+		}
 	default:
 		usage()
 	}
