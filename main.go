@@ -70,6 +70,10 @@ func main() {
 		switch args[2] {
 		case "list":
 			DataBagList()
+		case "create":
+			DataBagCreate(args[3])
+		case "delete":
+			DataBagDelete(args[3])
 		}
 	default:
 		usage()
