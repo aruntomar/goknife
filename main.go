@@ -76,7 +76,11 @@ func main() {
 		case "delete":
 			DataBagDelete(args[3])
 		case "show":
-			DataBagShow(args[3])
+			if len(args[3:]) > 1 {
+				DataBagGetItem(args[3], args[4])
+			} else {
+				DataBagShow(args[3])
+			}
 		case "from":
 			for _, fname := range args[5:] {
 				jsonData, err := ioutil.ReadFile(fname)

@@ -46,6 +46,19 @@ func DataBagShow(dbname string) {
 	}
 }
 
+// DataBagGetItem will display the item details.
+func DataBagGetItem(dbname, dbitem string) {
+	item, err := client.DataBags.GetItem(dbname, dbitem)
+	if err != nil {
+		log.Fatalf("%s\n", err)
+	}
+	value := item.(map[string]interface{})
+	for k, v := range value {
+		fmt.Printf("%s : %s\n", k, v)
+	}
+	// fmt.Printf("%v\n", item)
+}
+
 // DataBagCreateItem creates a data bag item
 func DataBagCreateItem(dbname string, dbitem chef.DataBagItem) (err error) {
 	err = client.DataBags.CreateItem(dbname, dbitem)
