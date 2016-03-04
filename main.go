@@ -85,7 +85,13 @@ func main() {
 				}
 				var rnd map[string]string
 				err = json.Unmarshal(jsonData, &rnd)
-				DataBagCreateItem(args[4], rnd)
+				if err != nil {
+					log.Fatalf("%v\n", err)
+				}
+				err = DataBagCreateItem(args[4], rnd)
+				if err != nil {
+					// DataBagUpdateItem(args[4], rnd["id"], rnd)
+				}
 			}
 
 		}

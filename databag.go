@@ -47,8 +47,21 @@ func DataBagShow(dbname string) {
 }
 
 // DataBagCreateItem creates a data bag item
-func DataBagCreateItem(dbname string, dbitem chef.DataBagItem) {
-	err := client.DataBags.CreateItem(dbname, dbitem)
+func DataBagCreateItem(dbname string, dbitem chef.DataBagItem) (err error) {
+	err = client.DataBags.CreateItem(dbname, dbitem)
+	if err != nil {
+		item := dbitem.(map[string]string)
+		DataBagUpdateItem(dbname, item["id"], dbitem)
+		// log.Fatalf("%s\n", err)
+		return err
+	}
+	fmt.Printf("Updated data_bag_item[%s::%s]\n", dbname, dbitem)
+	return nil
+}
+
+// DataBagUpdateItem will update the db item if already exists.
+func DataBagUpdateItem(dbname string, itemid string, dbitem chef.DataBagItem) {
+	err := client.DataBags.UpdateItem(dbname, itemid, dbitem)
 	if err != nil {
 		log.Fatalf("%s\n", err)
 	}
