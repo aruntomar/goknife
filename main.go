@@ -97,7 +97,12 @@ func main() {
 					// DataBagUpdateItem(args[4], rnd["id"], rnd)
 				}
 			}
-
+		}
+	case "search":
+		if len(args[1:]) > 1 {
+			SearchQuery(args[1], args[2])
+		} else {
+			ListSearchIndexes()
 		}
 	default:
 		usage()
