@@ -80,3 +80,17 @@ func DataBagUpdateItem(dbname string, itemid string, dbitem chef.DataBagItem) {
 	}
 	fmt.Printf("Updated data_bag_item[%s::%s]\n", dbname, dbitem)
 }
+
+func ShowDataBagUsage() {
+	fmt.Println(`
+		FATAL: Cannot find sub command for: 'data bag'
+Available data bag subcommands: (for details, knife SUB-COMMAND --help)
+
+** DATA BAG COMMANDS **
+knife data bag create BAG [ITEM] (options)
+knife data bag delete BAG [ITEM] (options)
+knife data bag edit BAG ITEM (options)
+knife data bag from file BAG FILE|FOLDER [FILE|FOLDER..] (options)
+knife data bag list (options)
+knife data bag show BAG [ITEM] (options)`)
+}
