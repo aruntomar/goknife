@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"log"
+	"sort"
 )
 
 // ListSearchIndexes will list the indexes that could be searched.
@@ -30,8 +31,15 @@ func SearchQuery(index, statement string) {
 	// fmt.Printf("%v\n", res.Rows)
 	for i := range res.Rows {
 		results := res.Rows[i].(map[string]interface{})
-		for k, v := range results {
-			fmt.Printf("%s:\t\t\t %s\n", k, v)
+		keys := []string{}
+		for key := range results {
+			keys = append(keys, key)
+		}
+		sort.Strings(keys)
+		for i := range keys {
+			key := keys[i]
+			value := results[key]
+			fmt.Printf("%s \t %s \n", key, value)
 		}
 		fmt.Printf("\n")
 	}
