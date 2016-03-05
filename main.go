@@ -97,8 +97,9 @@ func main() {
 					// DataBagUpdateItem(args[4], rnd["id"], rnd)
 				}
 			}
-
 		}
+	case "search":
+		ListSearchIndexes()
 	default:
 		usage()
 	}
