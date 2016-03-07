@@ -42,3 +42,14 @@ func NodeShow(name string) {
 	}
 	fmt.Printf("Node Name: %s\n Environment: %s\n Run List: %s\n ", node.Name, node.Environment, node.RunList)
 }
+
+// NodeDelete will delete a node
+func NodeDelete(name string) {
+	err := client.Nodes.Delete(name)
+	if err != nil {
+		log.Fatalf("%s\n", err)
+	} else {
+		fmt.Printf("\nDeleted node [%s]", name)
+	}
+
+}

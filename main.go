@@ -74,6 +74,17 @@ func main() {
 				NodeList()
 			case "show":
 				NodeShow(args[2])
+			case "delete":
+				if len(listOfArgs) >= 2 {
+					var reallyDelete string
+					fmt.Printf("Do you really want to delete node %s (Y/N)", args[2])
+					fmt.Scanln(&reallyDelete)
+					if strings.ToUpper(reallyDelete) == "Y" {
+						NodeDelete(args[2])
+					}
+				} else {
+					log.Fatalln("Fatal: You must specify a node name")
+				}
 			}
 		}
 	case "data":
