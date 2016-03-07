@@ -3,6 +3,8 @@ package main
 import (
 	"fmt"
 	"log"
+
+	"github.com/go-chef/chef"
 )
 
 var cmdNode = SubCommand{
@@ -40,7 +42,7 @@ func NodeShow(name string) {
 	if err != nil {
 		log.Fatalf("%s", err)
 	}
-	fmt.Printf("Node Name: %s\n Environment: %s\n Run List: %s\n ", node.Name, node.Environment, node.RunList)
+	fmt.Printf("Node Name: %s\n Environment: %s\n Run List: %s\n", node.Name, node.Environment, node.RunList)
 }
 
 // NodeDelete will delete a node
@@ -50,7 +52,27 @@ func NodeDelete(name string) {
 		fmt.Printf("Error: Node %s not found\n.", name)
 		log.Fatalf("%s\n", err)
 	} else {
-		fmt.Printf("Deleted node [%s]", name)
+		fmt.Printf("Deleted node [%s]\n", name)
 	}
+}
 
+// NodeCreate will create a node.
+func NodeCreate(name string) {
+	newNode := chef.Node{
+		Name:                name,
+		Environment:         "_default",
+		ChefType:            "node",
+		JsonClass:           "Chef::Node",
+		RunList:             make([]string, 0),
+		AutomaticAttributes: make(map[string]interface{}),
+		DefaultAttributes:   make(map[string]interface{}),
+		OverrideAttributes:  make(map[string]interface{}),
+		NormalAttributes:    make(map[string]interface{}),
+	}
+	_, err := client.Nodes.Post(newNode)
+	if err != nil {
+		log.Fatalf("%s\n", err)
+	} else {
+		fmt.Printf("Created node %s.\n", name)
+	}
 }

@@ -64,6 +64,7 @@ func main() {
 	}
 
 	switch args[0] {
+
 	case "node":
 		listOfArgs := args[1:]
 		if len(listOfArgs) == 0 {
@@ -82,6 +83,12 @@ func main() {
 					if strings.ToUpper(reallyDelete) == "Y" {
 						NodeDelete(args[2])
 					}
+				} else {
+					log.Fatalln("Fatal: You must specify a node name")
+				}
+			case "create":
+				if len(listOfArgs) >= 2 {
+					NodeCreate(args[2])
 				} else {
 					log.Fatalln("Fatal: You must specify a node name")
 				}
