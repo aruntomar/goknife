@@ -111,7 +111,17 @@ func main() {
 			case "list":
 				ClientList()
 			case "show":
-				ClientShow(args[2])
+				if len(listOfArgs) > 2 {
+					ClientShow(args[2])
+				} else {
+					log.Fatalln("Fatal: You must specify a client name")
+				}
+			case "delete":
+				if len(listOfArgs) > 2 {
+					ClientDelete(args[2])
+				} else {
+					log.Fatalln("Fatal: You must specify a client name")
+				}
 			}
 		}
 	case "search":

@@ -8,21 +8,21 @@ import (
 var cmdClient = SubCommand{
 	Name: "Client",
 	Usage: `
-Available client subcommands: (for details, knife SUB-COMMAND --help)
+Available client subcommands: (for details, goknife SUB-COMMAND --help)
 
 ** CLIENT COMMANDS **
-knife client bulk delete REGEX (options)
-knife client create CLIENTNAME (options)
-knife client delete CLIENT (options)
-knife client edit CLIENT (options)
-Usage: /usr/bin/knife (options)
-knife client key delete CLIENT KEYNAME (options)
-knife client key edit CLIENT KEYNAME (options)
-knife client key list CLIENT (options)
-knife client key show CLIENT KEYNAME (options)
-knife client list (options)
-knife client reregister CLIENT (options)
-knife client show CLIENT (options)`,
+goknife client bulk delete REGEX (options)
+goknife client create CLIENTNAME (options)
+goknife client delete CLIENT (options)
+goknife client edit CLIENT (options)
+Usage: /usr/bin/goknife (options)
+goknife client key delete CLIENT KEYNAME (options)
+goknife client key edit CLIENT KEYNAME (options)
+goknife client key list CLIENT (options)
+goknife client key show CLIENT KEYNAME (options)
+goknife client list (options)
+goknife client reregister CLIENT (options)
+goknife client show CLIENT (options)`,
 }
 
 // ClientList will list all the clients on the chef server
@@ -43,4 +43,13 @@ func ClientShow(name string) {
 		log.Fatalf("%s\n", err)
 	}
 	fmt.Printf(" admin: %t\n chef_type: %s\n name: %s\n validator: %t\n", myclient.Admin, myclient.ChefType, myclient.Name, myclient.Validator)
+}
+
+// ClientDelete will delete the provided client
+func ClientDelete(name string) {
+	fmt.Println(name)
+	err := client.Clients.Delete(name)
+	if err != nil {
+		log.Fatalf("%s\n", err)
+	}
 }
