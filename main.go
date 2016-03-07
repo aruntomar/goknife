@@ -4,10 +4,11 @@ import (
 	"encoding/json"
 	"flag"
 	"fmt"
-	"github.com/go-chef/chef"
 	"io/ioutil"
 	"log"
 	"os"
+
+	"github.com/go-chef/chef"
 )
 
 var (
@@ -20,6 +21,8 @@ type SubCommand struct {
 	Name string
 	// Description
 	Description string
+	// Usage
+	Usage string
 }
 
 func init() {
@@ -81,22 +84,29 @@ func main() {
 			} else {
 				DataBagShow(args[3])
 			}
-		case "from":
-			for _, fname := range args[5:] {
-				jsonData, err := ioutil.ReadFile(fname)
-				if err != nil {
-					log.Fatalf("%v\n", err)
-				}
-				var rnd map[string]string
-				err = json.Unmarshal(jsonData, &rnd)
-				if err != nil {
-					log.Fatalf("%v\n", err)
-				}
-				err = DataBagCreateItem(args[4], rnd)
-				if err != nil {
-					// DataBagUpdateItem(args[4], rnd["id"], rnd)
-				}
+		}
+	case "from":
+		for _, fname := range args[5:] {
+			jsonData, err := ioutil.ReadFile(fname)
+			if err != nil {
+				log.Fatalf("%v\n", err)
 			}
+			var rnd map[string]string
+			err = json.Unmarshal(jsonData, &rnd)
+			if err != nil {
+				log.Fatalf("%v\n", err)
+			}
+			err = DataBagCreateItem(args[4], rnd)
+			if err != nil {
+				// DataBagUpdateItem(args[4], rnd["id"], rnd)
+			}
+		}
+	case "client":
+		switch args[1] {
+		case "list":
+			ClientList()
+		case "show":
+			ClientShow(args[2])
 		}
 	case "search":
 		if len(args[1:]) > 1 {
