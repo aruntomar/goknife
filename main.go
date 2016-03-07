@@ -65,11 +65,16 @@ func main() {
 
 	switch args[0] {
 	case "node":
-		switch args[1] {
-		case "list":
-			NodeList()
-		case "show":
-			NodeShow(args[2])
+		listOfArgs := args[1:]
+		if len(listOfArgs) == 0 {
+			fmt.Println(cmdNode.Usage)
+		} else {
+			switch args[1] {
+			case "list":
+				NodeList()
+			case "show":
+				NodeShow(args[2])
+			}
 		}
 	case "data":
 		switch args[2] {
