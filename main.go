@@ -117,8 +117,14 @@ func main() {
 					log.Fatalln("Fatal: You must specify a client name")
 				}
 			case "delete":
-				if len(listOfArgs) > 2 {
+				if len(listOfArgs) >= 2 {
 					ClientDelete(args[2])
+				} else {
+					log.Fatalln("Fatal: You must specify a client name")
+				}
+			case "create":
+				if len(listOfArgs) >= 2 {
+					ClientCreate(args[2], false)
 				} else {
 					log.Fatalln("Fatal: You must specify a client name")
 				}
