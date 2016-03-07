@@ -102,11 +102,17 @@ func main() {
 			}
 		}
 	case "client":
-		switch args[1] {
-		case "list":
-			ClientList()
-		case "show":
-			ClientShow(args[2])
+		listOfArgs := args[1:]
+		// fmt.Println("List of args: ", listOfArgs)
+		if len(listOfArgs) == 0 {
+			fmt.Println(cmdClient.Usage)
+		} else {
+			switch args[1] {
+			case "list":
+				ClientList()
+			case "show":
+				ClientShow(args[2])
+			}
 		}
 	case "search":
 		if len(args[1:]) > 1 {
