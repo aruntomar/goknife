@@ -47,9 +47,21 @@ func ClientShow(name string) {
 
 // ClientDelete will delete the provided client
 func ClientDelete(name string) {
-	fmt.Println(name)
+	// fmt.Println(name)
 	err := client.Clients.Delete(name)
 	if err != nil {
 		log.Fatalf("%s\n", err)
+	} else {
+		fmt.Printf("Deleted client [%s]", name)
 	}
+}
+
+// ClientCreate will create a new client.
+func ClientCreate(name string, admin bool) {
+	result, err := client.Clients.Create(name, admin)
+	if err != nil {
+		log.Fatalf("%s\n", err)
+	}
+	fmt.Printf("Created client [%s]\n", name)
+	fmt.Println(result.PrivateKey)
 }
