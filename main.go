@@ -7,6 +7,7 @@ import (
 	"io/ioutil"
 	"log"
 	"os"
+	"strings"
 
 	"github.com/go-chef/chef"
 )
@@ -111,14 +112,19 @@ func main() {
 			case "list":
 				ClientList()
 			case "show":
-				if len(listOfArgs) > 2 {
+				if len(listOfArgs) >= 2 {
 					ClientShow(args[2])
 				} else {
 					log.Fatalln("Fatal: You must specify a client name")
 				}
 			case "delete":
 				if len(listOfArgs) >= 2 {
-					ClientDelete(args[2])
+					var reallyDelete string
+					fmt.Printf("Do you really want to delete client %s (Y/N)", args[2])
+					fmt.Scanln(&reallyDelete)
+					if strings.ToUpper(reallyDelete) == "Y" {
+						ClientDelete(args[2])
+					}
 				} else {
 					log.Fatalln("Fatal: You must specify a client name")
 				}

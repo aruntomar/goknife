@@ -40,6 +40,7 @@ func ClientList() {
 func ClientShow(name string) {
 	myclient, err := client.Clients.Get(name)
 	if err != nil {
+		log.Fatalln("Error: The object you are looking for could not be found.")
 		log.Fatalf("%s\n", err)
 	}
 	fmt.Printf(" admin: %t\n chef_type: %s\n name: %s\n validator: %t\n", myclient.Admin, myclient.ChefType, myclient.Name, myclient.Validator)
@@ -52,7 +53,7 @@ func ClientDelete(name string) {
 	if err != nil {
 		log.Fatalf("%s\n", err)
 	} else {
-		fmt.Printf("Deleted client [%s]", name)
+		fmt.Printf("Deleted client [%s]\n", name)
 	}
 }
 
