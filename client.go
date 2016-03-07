@@ -53,7 +53,7 @@ func ClientDelete(name string) {
 	if err != nil {
 		log.Fatalf("%s\n", err)
 	} else {
-		fmt.Printf("Deleted client [%s]\n", name)
+		fmt.Printf("Deleted client [%s]", name)
 	}
 }
 

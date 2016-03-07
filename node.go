@@ -47,9 +47,10 @@ func NodeShow(name string) {
 func NodeDelete(name string) {
 	err := client.Nodes.Delete(name)
 	if err != nil {
+		fmt.Printf("Error: Node %s not found\n.", name)
 		log.Fatalf("%s\n", err)
 	} else {
-		fmt.Printf("\nDeleted node [%s]", name)
+		fmt.Printf("Deleted node [%s]", name)
 	}
 
 }
