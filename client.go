@@ -38,5 +38,9 @@ func ClientList() {
 
 // ClientShow will display the details about a particular client.
 func ClientShow(name string) {
-
+	myclient, err := client.Clients.Get(name)
+	if err != nil {
+		log.Fatalf("%s\n", err)
+	}
+	fmt.Printf(" admin: %t\n chef_type: %s\n name: %s\n validator: %t\n", myclient.Admin, myclient.ChefType, myclient.Name, myclient.Validator)
 }
