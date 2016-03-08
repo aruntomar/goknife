@@ -2,9 +2,23 @@ package main
 
 import (
 	"fmt"
-	"github.com/go-chef/chef"
 	"log"
+
+	"github.com/go-chef/chef"
 )
+
+var cmdDataBag = SubCommand{
+	Name: "DataBag",
+	Usage: `
+
+** DATA BAG COMMANDS **
+goknife data bag create BAG [ITEM] (options)
+goknife data bag delete BAG [ITEM] (options)
+goknife data bag from file BAG FILE|FOLDER [FILE|FOLDER..] (options)
+goknife data bag list (options)
+goknife data bag show BAG [ITEM] (options)
+	`,
+}
 
 // DataBagList will list the databags
 func DataBagList() {
@@ -79,18 +93,4 @@ func DataBagUpdateItem(dbname string, itemid string, dbitem chef.DataBagItem) {
 		log.Fatalf("%s\n", err)
 	}
 	fmt.Printf("Updated data_bag_item[%s::%s]\n", dbname, dbitem)
-}
-
-func ShowDataBagUsage() {
-	fmt.Println(`
-		FATAL: Cannot find sub command for: 'data bag'
-Available data bag subcommands: (for details, knife SUB-COMMAND --help)
-
-** DATA BAG COMMANDS **
-knife data bag create BAG [ITEM] (options)
-knife data bag delete BAG [ITEM] (options)
-knife data bag edit BAG ITEM (options)
-knife data bag from file BAG FILE|FOLDER [FILE|FOLDER..] (options)
-knife data bag list (options)
-knife data bag show BAG [ITEM] (options)`)
 }

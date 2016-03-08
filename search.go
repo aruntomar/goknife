@@ -6,6 +6,14 @@ import (
 	"sort"
 )
 
+var cmdSearch = SubCommand{
+	Name: "Search",
+	Usage: `
+** SEARCH COMMANDS **
+goknife search INDEX QUERY (options)
+`,
+}
+
 // ListSearchIndexes will list the indexes that could be searched.
 func ListSearchIndexes() {
 	indexes, err := client.Search.Indexes()

@@ -8,20 +8,11 @@ import (
 var cmdClient = SubCommand{
 	Name: "Client",
 	Usage: `
-Available client subcommands: (for details, goknife SUB-COMMAND --help)
 
 ** CLIENT COMMANDS **
-goknife client bulk delete REGEX (options)
 goknife client create CLIENTNAME (options)
 goknife client delete CLIENT (options)
-goknife client edit CLIENT (options)
-Usage: /usr/bin/goknife (options)
-goknife client key delete CLIENT KEYNAME (options)
-goknife client key edit CLIENT KEYNAME (options)
-goknife client key list CLIENT (options)
-goknife client key show CLIENT KEYNAME (options)
 goknife client list (options)
-goknife client reregister CLIENT (options)
 goknife client show CLIENT (options)`,
 }
 
