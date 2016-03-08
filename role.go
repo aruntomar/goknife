@@ -71,3 +71,8 @@ func RoleShow(name string) {
 	fmt.Printf(" chef_type:\t %s \n default_attributes: \t %s\n description: \t %s\n name: \t %s\n run_list: \t %s\n override_attributes: \t %s\n json_class: \t %s\n",
 		role.ChefType, role.DefaultAttributes, role.Description, role.Name, role.RunList, role.OverrideAttributes, role.JsonClass)
 }
+
+// RoleDelete will delete a role
+func RoleDelete(name string) {
+	fmt.Println("#TODO")
+}
