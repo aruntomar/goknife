@@ -3,6 +3,8 @@ package main
 import (
 	"fmt"
 	"log"
+
+	"github.com/go-chef/chef"
 )
 
 var cmdRole = SubCommand{
@@ -32,8 +34,21 @@ goknife role show ROLE (options)
 }
 
 // RoleCreate will create a role
-func RoleCreate() {
-
+func RoleCreate(name string) {
+	newRole := chef.Role{
+		Name:               name,
+		ChefType:           "role",
+		Description:        "",
+		RunList:            make([]string, 0),
+		DefaultAttributes:  make(map[string]interface{}),
+		OverrideAttributes: make(map[string]interface{}),
+		JsonClass:          "Chef::Role",
+	}
+	result, err := client.Roles.Create(&newRole)
+	if err != nil {
+		log.Fatalf("%s\n", err)
+	}
+	fmt.Printf("%v\n", result)
 }
 
 // RoleList will list all the roles
