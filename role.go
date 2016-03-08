@@ -61,3 +61,13 @@ func RoleList() {
 		fmt.Println(k)
 	}
 }
+
+// RoleShow will display role details.
+func RoleShow(name string) {
+	role, err := client.Roles.Get(name)
+	if err != nil {
+		log.Fatalf("%s\n", err)
+	}
+	fmt.Printf(" chef_type:\t %s \n default_attributes: \t %s\n description: \t %s\n name: \t %s\n run_list: \t %s\n override_attributes: \t %s\n json_class: \t %s\n",
+		role.ChefType, role.DefaultAttributes, role.Description, role.Name, role.RunList, role.OverrideAttributes, role.JsonClass)
+}
