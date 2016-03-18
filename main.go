@@ -195,6 +195,41 @@ func main() {
 			}
 		}
 
+	case "cookbook":
+		listOfArgs := args[1:]
+		// fmt.Println("List of args: ", listOfArgs)
+		if len(listOfArgs) == 0 {
+			fmt.Println(cmdCookbook.Usage)
+		} else {
+			switch args[1] {
+			case "list":
+				CookbookList()
+				// case "show":
+				// 	if len(listOfArgs) >= 2 {
+				// 		RoleShow(args[2])
+				// 	} else {
+				// 		log.Fatalln("Fatal: You must specify a role name")
+				// 	}
+				// case "delete":
+				// 	if len(listOfArgs) >= 2 {
+				// 		var reallyDelete string
+				// 		fmt.Printf("Do you really want to delete role %s (Y/N)", args[2])
+				// 		fmt.Scanln(&reallyDelete)
+				// 		if strings.ToUpper(reallyDelete) == "Y" {
+				// 			RoleDelete(args[2])
+				// 		}
+				// 	} else {
+				// 		log.Fatalln("Fatal: You must specify a role name")
+				// 	}
+				// case "create":
+				// 	if len(listOfArgs) >= 2 {
+				// 		RoleCreate(args[2])
+				// 	} else {
+				// 		log.Fatalln("Fatal: You must specify a role name")
+				// 	}
+			}
+		}
+
 	case "search":
 		if len(args[1:]) > 1 {
 			SearchQuery(args[1], args[2])
@@ -214,6 +249,6 @@ USAGE: knife sub-command (options)
 
 Available subcommands:
 	`
-	usageMSG := msg + cmdSearch.Usage + cmdDataBag.Usage + cmdClient.Usage + cmdNode.Usage + cmdRole.Usage
+	usageMSG := msg + cmdSearch.Usage + cmdDataBag.Usage + cmdClient.Usage + cmdNode.Usage + cmdRole.Usage + cmdCookbook.Usage
 	fmt.Println(usageMSG)
 }
