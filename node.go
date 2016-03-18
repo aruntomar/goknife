@@ -3,8 +3,8 @@ package main
 import (
 	"fmt"
 	"log"
-
-	"github.com/go-chef/chef"
+	// "github.com/go-chef/chef"
+	"chef"
 )
 
 var cmdNode = SubCommand{

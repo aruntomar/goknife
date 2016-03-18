@@ -1,6 +1,7 @@
 package main
 
 import (
+	"chef"
 	"encoding/json"
 	"flag"
 	"fmt"
@@ -8,8 +9,7 @@ import (
 	"log"
 	"os"
 	"strings"
-
-	"github.com/go-chef/chef"
+	// "github.com/go-chef/chef"
 )
 
 var (
@@ -204,24 +204,43 @@ func main() {
 			switch args[1] {
 			case "list":
 				CookbookList()
-				// case "show":
-				// 	if len(listOfArgs) >= 2 {
-				// 		RoleShow(args[2])
-				// 	} else {
-				// 		log.Fatalln("Fatal: You must specify a role name")
-				// 	}
-				// case "delete":
-				// 	if len(listOfArgs) >= 2 {
-				// 		var reallyDelete string
-				// 		fmt.Printf("Do you really want to delete role %s (Y/N)", args[2])
-				// 		fmt.Scanln(&reallyDelete)
-				// 		if strings.ToUpper(reallyDelete) == "Y" {
-				// 			RoleDelete(args[2])
-				// 		}
-				// 	} else {
-				// 		log.Fatalln("Fatal: You must specify a role name")
-				// 	}
-				// case "create":
+			// case "show":
+			// 	if len(listOfArgs) >= 2 {
+			// 		RoleShow(args[2])
+			// 	} else {
+			// 		log.Fatalln("Fatal: You must specify a role name")
+			// 	}
+			case "delete":
+				if len(listOfArgs) >= 2 {
+					listOfCb, err := client.Cookbooks.GetAvailableVersions(args[2], "")
+					if err != nil {
+						log.Fatalf("Error: Cannot find cookbook named %s to delete", args[2])
+					}
+					for k, v := range listOfCb {
+						if len(v.Versions) == 1 {
+							CookbookDelete(args[2], v.Versions[0].Version)
+						} else {
+							var n int
+							fmt.Printf("Which version(s) do you want to delete? \n")
+							for i, value := range v.Versions {
+								fmt.Printf("%d. %s %s\n", i+1, k, value.Version)
+							}
+							deleteAllVersions := len(v.Versions) + 1
+							fmt.Printf("%d. All Versions\n", deleteAllVersions)
+							fmt.Scanln(&n)
+							if n == deleteAllVersions {
+								for _, val := range v.Versions {
+									CookbookDelete(args[2], val.Version)
+								}
+							} else {
+								CookbookDelete(args[2], v.Versions[int(n)-1].Version)
+							}
+						}
+					}
+				} else {
+					log.Fatalln("Fatal: You must provide the name of the cookbook to delete.")
+				}
+			case "create":
 				// 	if len(listOfArgs) >= 2 {
 				// 		RoleCreate(args[2])
 				// 	} else {

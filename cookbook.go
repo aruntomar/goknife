@@ -31,7 +31,7 @@ func CookbookList() {
 func CookbookDelete(name, version string) {
 	err := client.Cookbooks.Delete(name, version)
 	if err != nil {
-		log.Fatalf("Error: %s\n", err)
+		log.Fatalf("Error: Cannot find cookbook named %s to delete", name)
 	} else {
 		fmt.Printf("Deleted cookbook [%s] [%s]\n", name, version)
 	}
