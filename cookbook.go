@@ -24,6 +24,15 @@ func CookbookList() {
 		for _, i := range v.Versions {
 			fmt.Printf("%s\t\t\t\t\t%s\n", k, i.Version)
 		}
-		// fmt.Printf("%s\t%s\n", k, v.Versions)
+	}
+}
+
+// CookbookDelete will delete the cookbook.
+func CookbookDelete(name, version string) {
+	err := client.Cookbooks.Delete(name, version)
+	if err != nil {
+		log.Fatalf("Error: %s\n", err)
+	} else {
+		fmt.Printf("Deleted cookbook [%s] [%s]\n", name, version)
 	}
 }
