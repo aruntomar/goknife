@@ -1,15 +1,14 @@
 package main
 
 import (
-	"chef"
 	"encoding/json"
 	"flag"
 	"fmt"
+	"github.com/aruntomar/chef"
 	"io/ioutil"
 	"log"
 	"os"
 	"strings"
-	// "github.com/go-chef/chef"
 )
 
 var (

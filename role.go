@@ -1,10 +1,9 @@
 package main
 
 import (
-	"chef"
 	"fmt"
+	"github.com/aruntomar/chef"
 	"log"
-	// "github.com/go-chef/chef"
 )
 
 var cmdRole = SubCommand{
