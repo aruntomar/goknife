@@ -4,11 +4,12 @@ import (
 	"encoding/json"
 	"flag"
 	"fmt"
-	"github.com/aruntomar/chef"
 	"io/ioutil"
 	"log"
 	"os"
 	"strings"
+
+	"github.com/aruntomar/chef"
 )
 
 var (
@@ -203,12 +204,12 @@ func main() {
 			switch args[1] {
 			case "list":
 				CookbookList()
-			// case "show":
-			// 	if len(listOfArgs) >= 2 {
-			// 		RoleShow(args[2])
-			// 	} else {
-			// 		log.Fatalln("Fatal: You must specify a role name")
-			// 	}
+			case "show":
+				if len(listOfArgs) >= 2 {
+					CookbookShow(args[2], args[3])
+				} else {
+					log.Fatalln("Fatal: You must specify a cookbook name")
+				}
 			case "delete":
 				if len(listOfArgs) >= 2 {
 					listOfCb, err := client.Cookbooks.GetAvailableVersions(args[2], "")
