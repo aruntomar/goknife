@@ -37,3 +37,12 @@ func CookbookDelete(name, version string) {
 		fmt.Printf("Deleted cookbook [%s] [%s]\n", name, version)
 	}
 }
+
+// CookbookShow will display cookbook details for a specific version
+func CookbookShow(name, version string) {
+	cb, err := client.Cookbooks.GetVersion(name, version)
+	if err != nil {
+		log.Fatalf("Error: %s\n", err)
+	}
+	fmt.Printf("attributes: %s\nchef_type: %s\ncookbook_name: %s\n", cb.Attributes, cb.ChefType, cb.Name)
+}
