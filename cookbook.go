@@ -12,6 +12,7 @@ var cmdCookbook = SubCommand{
 ** COOKBOOK COMMANDS **
 goknife cookbook list
 goknife cookbook delete COOKBOOK VERSION
+goknife cookbook show COOKBOOK [VERSION]
 `,
 }
 
