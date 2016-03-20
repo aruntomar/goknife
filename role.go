@@ -74,5 +74,11 @@ func RoleShow(name string) {
 
 // RoleDelete will delete a role
 func RoleDelete(name string) {
-	fmt.Println("#TODO")
+	err := client.Roles.Delete(name)
+	if err != nil {
+		fmt.Printf("Role %s could not be found.", name)
+		fmt.Printf("Error: %s\n", err)
+	} else {
+		fmt.Printf("Role %s deleted.\n", name)
+	}
 }
