@@ -205,7 +205,19 @@ func main() {
 			case "list":
 				CookbookList()
 			case "show":
-				if len(listOfArgs) >= 2 {
+				if len(listOfArgs) == 2 {
+					listOfVersions, err := client.Cookbooks.GetAvailableVersions(args[2], "")
+					if err != nil {
+						log.Fatalf("Error: %s\n", err)
+					}
+					for k, v := range listOfVersions {
+						mystring := k
+						for _, m := range v.Versions {
+							mystring = mystring + "\t" + m.Version
+						}
+						fmt.Println(mystring)
+					}
+				} else if len(listOfArgs) > 3 {
 					CookbookShow(args[2], args[3])
 				} else {
 					log.Fatalln("Fatal: You must specify a cookbook name")
