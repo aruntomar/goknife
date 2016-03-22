@@ -217,7 +217,7 @@ func main() {
 						}
 						fmt.Println(mystring)
 					}
-				} else if len(listOfArgs) > 3 {
+				} else if len(listOfArgs) >= 3 {
 					CookbookShow(args[2], args[3])
 				} else {
 					log.Fatalln("Fatal: You must specify a cookbook name")
